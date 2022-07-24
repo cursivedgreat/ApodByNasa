@@ -74,6 +74,7 @@ class DownloadService {
         activeDownloads[url] = download
     }
     
+    //MARK: - Network status changes handling APIs
     func pauseAllDownloads() {
         for url in activeDownloads.keys {
             pauseDownload(url)
