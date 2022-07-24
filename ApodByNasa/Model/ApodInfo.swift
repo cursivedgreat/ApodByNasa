@@ -37,3 +37,18 @@ class ApodInfo: Codable {
         self.media_type = mediaType
     }
 }
+
+class ResponseError: Codable {
+    var code: Int
+    var msg: String
+    init(code: Int, msg: String){
+        self.code = code
+        self.msg = msg
+    }
+}
+
+enum NetworkError: Error {
+    case invalidDate(String)
+    case http(Error)
+    case unknown(Error)
+}

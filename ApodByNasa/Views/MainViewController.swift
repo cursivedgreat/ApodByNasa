@@ -56,10 +56,31 @@ class MainViewController: UIViewController {
                         self?.storage.saveResponse(apodInfo: apodInfo, forDateString: dateString)
                     case .failure(let error):
                         print("Error is \(error)")
+                        if let weakSelf = self {
+                            DispatchQueue.main.async {
+                                weakSelf.handle(error: error)
+                            }
+                        }
                     }
                 }
             }
         }
+    }
+    
+    func handle(error: NetworkError) {
+        var errorString = ""
+        switch error {
+        case .invalidDate(let string):
+            errorString = string
+        case .http(let error):
+            errorString = error.localizedDescription
+        case .unknown(let error):
+            errorString = error.localizedDescription
+        }
+        let alertViewController = UIAlertController(title: "Error", message: errorString, preferredStyle: .alert)
+        alertViewController.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.dismiss(animated: false)
+        self.present(alertViewController, animated: true)
     }
     
     ///Returns the date formatter
