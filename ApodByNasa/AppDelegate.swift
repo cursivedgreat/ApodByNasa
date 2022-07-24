@@ -7,6 +7,9 @@
 
 import UIKit
 
+///Global document directory URL variable
+var documentDirectory: URL? = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

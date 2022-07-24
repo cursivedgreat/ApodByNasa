@@ -1,24 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ars-XU-ZNr">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Picture of the day-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="ApodByNasa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MaB-TN-W2K">
+                                <rect key="frame" x="16" y="104" width="382" height="90"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lsm-cY-NYK">
+                                        <rect key="frame" x="0.0" y="0.0" width="127.5" height="90"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="bjh-0Y-Z5c">
+                                        <rect key="frame" x="127.5" y="0.0" width="254.5" height="90"/>
+                                        <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                            <!--1970-01-01 11:00:00 +0000-->
+                                        </date>
+                                        <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                            <!--2037-12-31 11:00:00 +0000-->
+                                        </date>
+                                        <connections>
+                                            <action selector="handleValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="dBI-2h-dlo"/>
+                                        </connections>
+                                    </datePicker>
+                                </subviews>
+                            </stackView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzL-1o-G1X">
+                                <rect key="frame" x="0.0" y="210" width="414" height="652"/>
+                                <connections>
+                                    <segue destination="V4h-Qe-oFB" kind="embed" id="uja-S3-O36"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MaB-TN-W2K" secondAttribute="trailing" constant="16" id="3Bg-mO-cs2"/>
+                            <constraint firstItem="MaB-TN-W2K" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="BA1-ns-psv"/>
+                            <constraint firstItem="fzL-1o-G1X" firstAttribute="top" secondItem="MaB-TN-W2K" secondAttribute="bottom" constant="16" id="ZuV-fo-Sgs"/>
+                            <constraint firstItem="fzL-1o-G1X" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eAZ-nq-rme"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fzL-1o-G1X" secondAttribute="trailing" id="gII-LV-fBl"/>
+                            <constraint firstItem="MaB-TN-W2K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="pqM-K2-a0O"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fzL-1o-G1X" secondAttribute="bottom" id="yD6-HO-Zqt"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Picture of the day" id="KKM-ns-ZGQ">
+                        <barButtonItem key="rightBarButtonItem" title="Favorites" id="k4n-ox-P5e">
+                            <connections>
+                                <action selector="showFavouriteList:" destination="BYZ-38-t0r" id="nSb-BI-phU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="containerView" destination="fzL-1o-G1X" id="cTv-vH-byY"/>
+                        <outlet property="datePicker" destination="bjh-0Y-Z5c" id="cDB-4A-SGm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-445" y="-729"/>
+        </scene>
+        <!--Apod View Controller-->
+        <scene sceneID="eVP-Dk-Zi7">
+            <objects>
+                <tableViewController storyboardIdentifier="ApodViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="V4h-Qe-oFB" customClass="ApodViewController" customModule="ApodByNasa" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vWi-UH-bSN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="652"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="395" id="cNn-1x-opI" customClass="ImageCell" customModule="ApodByNasa" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="395"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cNn-1x-opI" id="SLg-wh-pFq">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="395"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="abT-Ut-Xcf">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="395"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="abT-Ut-Xcf" secondAttribute="height" multiplier="1:1" priority="999" id="YKd-U4-NX4"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="abT-Ut-Xcf" firstAttribute="leading" secondItem="SLg-wh-pFq" secondAttribute="leading" id="CA9-hq-CZa"/>
+                                        <constraint firstItem="abT-Ut-Xcf" firstAttribute="top" secondItem="SLg-wh-pFq" secondAttribute="top" id="MFx-oK-TeZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="abT-Ut-Xcf" secondAttribute="trailing" id="Q4l-Rc-Vsh"/>
+                                        <constraint firstAttribute="bottom" secondItem="abT-Ut-Xcf" secondAttribute="bottom" id="VeL-6V-uU6"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="apodImageView" destination="abT-Ut-Xcf" id="zZc-kB-FlU"/>
+                                    <outlet property="imageAspectRatioConstraint" destination="YKd-U4-NX4" id="Z9U-vp-K9Y"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favouriteCell" id="FR1-OU-2x2" customClass="FavouriteButtonCell" customModule="ApodByNasa" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="439.5" width="414" height="30"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FR1-OU-2x2" id="Wb2-6Y-InG">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hPk-8h-y44">
+                                            <rect key="frame" x="382" y="8" width="24" height="14"/>
+                                            <inset key="imageEdgeInsets" minX="24" minY="16" maxX="24" maxY="16"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain"/>
+                                            <connections>
+                                                <action selector="favouriteButtonPressed:" destination="FR1-OU-2x2" eventType="touchUpInside" id="dVU-Io-TYm"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="hPk-8h-y44" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wb2-6Y-InG" secondAttribute="leading" constant="20" symbolic="YES" id="69u-l5-UMN"/>
+                                        <constraint firstItem="hPk-8h-y44" firstAttribute="top" secondItem="Wb2-6Y-InG" secondAttribute="top" constant="8" id="D0W-aH-iqE"/>
+                                        <constraint firstAttribute="bottom" secondItem="hPk-8h-y44" secondAttribute="bottom" constant="8" id="NH2-Ya-wOb"/>
+                                        <constraint firstAttribute="trailing" secondItem="hPk-8h-y44" secondAttribute="trailing" constant="8" id="kMN-aV-jVd"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="favouriteButton" destination="hPk-8h-y44" id="NNB-M2-tah"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="V4h-Qe-oFB" id="gQ4-FW-xyD"/>
+                            <outlet property="delegate" destination="V4h-Qe-oFB" id="4L4-VB-I1P"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qRB-6J-Pe0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="283" y="-729"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="sUa-XZ-tZW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ars-XU-ZNr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OKc-xO-f3m">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="2yG-3e-DJJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NoF-c0-fnW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1183" y="-728"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
